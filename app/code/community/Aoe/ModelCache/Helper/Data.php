@@ -19,7 +19,7 @@ class Aoe_ModelCache_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @param string $model
 	 * @param int $id
 	 * @param bool $clean
-	 * @return
+	 * @return Mage_Core_Model_Abstract|bool
 	 */
 	public function get($model, $id, $clean=false) {
 		if ($clean) {
@@ -33,12 +33,16 @@ class Aoe_ModelCache_Helper_Data extends Mage_Core_Helper_Abstract {
 			}
 			$object = Mage::getModel($model);
 			if (!$object) {
-				Mage::throwException(sprintf('Could not find model "%s"', htmlspecialchars($model)));
-			}
-			/* @var $object Mage_Core_Model_Abstract */
-			$object->load($id);
-			if ($object->getId() != $id) {
-				Mage::throwException(sprintf('Model "%s" with id "%s" not found', htmlspecialchars($model), htmlspecialchars($id)));
+				// Mage::throwException(sprintf('Could not find model "%s"', htmlspecialchars($model)));
+				Mage::log(sprintf('Could not find model "%s"', htmlspecialchars($model)));
+				$object = false;
+			} else {
+				/* @var $object Mage_Core_Model_Abstract */
+				$object->load($id);
+				if ($object->getId() != $id) {
+					// Mage::throwException(sprintf('Model "%s" with id "%s" not found', htmlspecialchars($model), htmlspecialchars($id)));
+					Mage::log(sprintf('Model "%s" with id "%s" not found', htmlspecialchars($model), htmlspecialchars($id)));
+				}
 			}
 			$this->_cache[$model][$id] = $object;
 		}
