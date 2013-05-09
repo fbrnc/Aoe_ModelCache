@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aoe_ModelCache>
+            <version>0.0.1</version>
+        </Aoe_ModelCache>
+    </modules>
+    <global>
+
+		<helpers>
+			<aoe_modelcache>
+				<class>Aoe_ModelCache_Helper</class>
+			</aoe_modelcache>
+		</helpers>
+
+		<models>
+			<aoe_modelcache>
+				<class>Aoe_ModelCache_Model</class>
+			</aoe_modelcache>
+		</models>
+
+		<!--<events>
+			<model_load_before>
+				<observers>
+					<aoe_modelcache>
+						<type>singleton</type>
+						<class>aoe_modelcache/observer</class>
+						<method>log</method>
+					</aoe_modelcache>
+				</observers>
+			</model_load_before>
+		</events>-->
+
+    </global>
+</config>
